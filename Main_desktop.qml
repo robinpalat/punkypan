@@ -137,7 +137,7 @@ Window {
                 Layout.leftMargin: 8
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                placeholderText: qsTr("Text Area")
+                placeholderText: qsTr("")
             }
 
 

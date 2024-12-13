@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext> // Incluye esta cabecera
-#include <QIcon>  // Esto es necesario para usar QIcon
+#include <QQmlContext> 
+#include <QIcon>  
 #include "logic.h"
 
 
@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
 
-    // Verificar si el ícono se carga correctamente
+
     QIcon appIcon(":/icono.png");
     app.setWindowIcon(appIcon);
 

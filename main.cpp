@@ -4,13 +4,15 @@
 #include <QIcon>  // Esto es necesario para usar QIcon
 #include "logic.h"
 
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    // Establecer el icono de la ventana desde el archivo de recursos
-    QIcon appIcon(":/resources/icon.png");  // Ruta del archivo en el archivo .qrc
+
+    // Verificar si el ícono se carga correctamente
+    QIcon appIcon(":/icono.png");
     app.setWindowIcon(appIcon);
 
 
@@ -27,7 +29,7 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("Punkypank", "Main");
+    engine.loadFromModule("Punkypan", "Main");
 
     return app.exec();
 }

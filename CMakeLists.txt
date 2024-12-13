@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(Punkypank VERSION 0.1 LANGUAGES CXX)
+project(Punkypan VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -27,13 +27,14 @@ endif()
 configure_file(${CMAKE_SOURCE_DIR}/${MAIN_QML_FILE} ${CMAKE_SOURCE_DIR}/Main.qml COPYONLY)
 
 
-qt_add_executable(appPunkypank
+qt_add_executable(appPunkypan
     main.cpp
     logic.cpp
+    resources.qrc
 )
 
-qt_add_qml_module(appPunkypank
-    URI Punkypank
+qt_add_qml_module(appPunkypan
+    URI Punkypan
     VERSION 1.0
     QML_FILES
         Main_mobile.qml
@@ -45,25 +46,31 @@ qt_add_qml_module(appPunkypank
         RESOURCES android/AndroidManifest.xml android/build.gradle android/res/values/libs.xml android/res/xml/qtprovider_paths.xml android/gradle/wrapper/gradle-wrapper.jar android/gradle/wrapper/gradle-wrapper.properties android/gradle.properties android/gradlew android/gradlew.bat
 )
 
-qt_add_resources(RESOURCES resources.qrc)
+qt_add_resources(resources resources.qrc)
+target_sources(appPunkypan PRIVATE main.cpp ${resources})
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
-set_target_properties(appPunkypank PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appPunkypank
+set_target_properties(appPunkypan PROPERTIES
+#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appPunkypan
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appPunkypank
+target_sources(appPunkypan PRIVATE
+    main.cpp
+    logic.cpp
+    resources.qrc
+)
+target_link_libraries(appPunkypan
     PRIVATE Qt6::Quick
 )
 
 include(GNUInstallDirs)
-install(TARGETS appPunkypank
+install(TARGETS appPunkypan
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

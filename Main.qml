@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 import QtQuick.Window 2.15
 
+
 Window {
     id: window
     width: 600
@@ -10,8 +11,9 @@ Window {
     visible: true
     color: window.color
     flags: Qt.Window
+    visibility: Window.Windowed
+    title: "Punkypan"
     contentOrientation: Qt.PortraitOrientation
-    title: qsTr("Punkypank")
 
 
     // Definir un objeto de configuración con un id explícito
@@ -33,12 +35,86 @@ Window {
 
     RowLayout {
         id: rowLayout
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
         anchors.fill: parent
+        anchors.leftMargin: 8
+        anchors.rightMargin: 8
+        anchors.topMargin: 8
+        anchors.bottomMargin: 8
+
+        ColumnLayout {
+            id: columnLayout2
+            Layout.rightMargin: 5
+            Layout.topMargin: 8
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignRight | Qt.AlignTop
+
+            TextField {
+                id: harinaInput
+                color: "#afafaf"
+                font.letterSpacing: 1
+                Layout.minimumHeight: 30
+                selectionColor: "#f60a0a0a"
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.rightMargin: 8
+                Layout.leftMargin: 8
+                Layout.bottomMargin: 0
+                Layout.topMargin: 5
+                Layout.fillWidth: true
+                placeholderText: qsTr("Harina (kg)")
+            }
+
+            TextField {
+                id: levaduraInput
+                color: "#afafaf"
+                font.letterSpacing: 1
+                Layout.minimumHeight: 30
+                selectionColor: "#f60a0a0a"
+                font.preferShaping: false
+                Layout.rightMargin: 8
+                Layout.bottomMargin: 0
+                Layout.leftMargin: 8
+                Layout.topMargin: 5
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                placeholderText: qsTr("Levadura (g)")
+            }
+
+            TextField {
+                id: gasInput
+                color: "#afafaf"
+                font.letterSpacing: 1
+                Layout.minimumHeight: 30
+                selectionColor: "#f60a0a0a"
+                Layout.rightMargin: 8
+                Layout.bottomMargin: 0
+                Layout.leftMargin: 8
+                Layout.topMargin: 5
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                placeholderText: qsTr("Gas (min)")
+            }
+
+            TextField {
+                id: panesInput
+                color: "#afafaf"
+                font.letterSpacing: 1
+                Layout.minimumHeight: 30
+                selectionColor: "#f60a0a0a"
+                Layout.rightMargin: 8
+                Layout.bottomMargin: 0
+                Layout.leftMargin: 8
+                Layout.topMargin: 5
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                placeholderText: qsTr("Pan producido (kg)")
+            }
+        }
 
         ColumnLayout {
             id: columnLayout1
-            width: 100
-            height: 100
             Layout.minimumWidth: 300
             Layout.fillWidth: false
             Layout.minimumHeight: 300
@@ -68,9 +144,10 @@ Window {
             Button {
                 id: calcButton
                 text: qsTr("Calcular")
-                font.pixelSize: 12
+                display: AbstractButton.TextBesideIcon
+                icon.source: "icono.png"
                 font.italic: false
-                highlighted: true
+                highlighted: false
                 Layout.fillHeight: false
                 bottomInset: 0
                 layer.sourceRect.x: 0
@@ -79,11 +156,10 @@ Window {
                 Layout.minimumHeight: 30
                 Layout.bottomMargin: 10
                 Layout.topMargin: 5
-                Layout.rightMargin: 40
-                Layout.leftMargin: 40
+                Layout.rightMargin: 8
+                Layout.leftMargin: 8
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
                 flat: false
-                font.weight: Font.Normal
                 font.bold: false
                 Layout.fillWidth: true
 
@@ -102,34 +178,25 @@ Window {
                     resultText.text = logic.calcularGanancia(harina, levadura, gas, panProducido);
                 }
 
-
             }
 
 
             RowLayout {
                 id: rowLayout1
-                width: 100
-                height: 100
+                Layout.rightMargin: 8
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
                 Layout.fillHeight: false
                 Layout.fillWidth: true
 
+
                 Button {
-                    id: button
-                    height: 24
+                    id: buttonconfigDialog
                     text: qsTr("Configurar")
                     Layout.fillWidth: true
-                    highlighted: false
-                    flat: false
-                    layer.enabled: false
-                    display: AbstractButton.TextOnly
-                    clip: false
                     Layout.leftMargin: 8
-                    Layout.topMargin: 0
                     Layout.bottomMargin: 8
-                    font.pointSize: 11
+                    onClicked: configDialog.open()
                 }
-
                 Button {
                     id: button1
                     text: qsTr("Productos")
@@ -139,85 +206,8 @@ Window {
                 }
             }
 
-
-
         }
 
-        ColumnLayout {
-            id: columnLayout2
-            width: 100
-            height: 100
-            Layout.rightMargin: 5
-            Layout.topMargin: 8
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignRight | Qt.AlignTop
-
-            TextField {
-                id: harinaInput
-                height: 80
-                color: "#262626"
-                font.letterSpacing: 1
-                Layout.minimumHeight: 30
-                selectionColor: "#f60a0a0a"
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                Layout.rightMargin: 8
-                Layout.leftMargin: 8
-                Layout.bottomMargin: 0
-                Layout.topMargin: 5
-                Layout.fillWidth: true
-                placeholderText: qsTr("Harina (kg)")
-            }
-
-            TextField {
-                id: levaduraInput
-                height: 80
-                color: "#262626"
-                font.letterSpacing: 1
-                Layout.minimumHeight: 30
-                selectionColor: "#f60a0a0a"
-                font.preferShaping: false
-                Layout.rightMargin: 8
-                Layout.bottomMargin: 0
-                Layout.leftMargin: 8
-                Layout.topMargin: 5
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                placeholderText: qsTr("Levadura (g)")
-            }
-
-            TextField {
-                id: gasInput
-                height: 80
-                color: "#262626"
-                font.letterSpacing: 1
-                Layout.minimumHeight: 30
-                selectionColor: "#f60a0a0a"
-                Layout.rightMargin: 8
-                Layout.bottomMargin: 0
-                Layout.leftMargin: 8
-                Layout.topMargin: 5
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                placeholderText: qsTr("Gas (min)")
-            }
-
-            TextField {
-                id: panesInput
-                height: 80
-                color: "#262626"
-                font.letterSpacing: 1
-                Layout.minimumHeight: 30
-                selectionColor: "#f60a0a0a"
-                Layout.rightMargin: 8
-                Layout.bottomMargin: 0
-                Layout.leftMargin: 8
-                Layout.topMargin: 5
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                placeholderText: qsTr("Pan producido (kg)")
-            }
-        }
     }
 
     Dialog {
@@ -290,13 +280,6 @@ Window {
             }
         }
 
-
     }
-
-
-
-
-
-
 
 }

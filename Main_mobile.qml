@@ -10,7 +10,7 @@ Window {
     color: "#fbf9f5"
     flags: Qt.Window
     contentOrientation: Qt.PortraitOrientation
-    title: qsTr("Punkypank")
+    title: qsTr("Punkypan")
 
 
     // Definir un objeto de configuración con un id explícito

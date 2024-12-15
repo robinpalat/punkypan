@@ -55,6 +55,7 @@ Window {
                 id: harinaInput
                 color: "#afafaf"
                 font.letterSpacing: 1
+                hoverEnabled: true
                 Layout.minimumHeight: 30
                 selectionColor: "#f60a0a0a"
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -64,6 +65,15 @@ Window {
                 Layout.topMargin: 5
                 Layout.fillWidth: true
                 placeholderText: qsTr("Harina (kg)")
+                inputMethodHints: Qt.ImhDigitsOnly
+                onTextChanged: {
+                    // permitir solo numeros y punto decimal
+                    harinaInput.text = harinaInput.text.replace(/[^0-9.]/g, '');
+                    // Permitir solo un punto decimal
+                    if (harinaInput.text.indexOf('.') !== harinaInput.text.lastIndexOf('.')) {
+                        harinaInput.text = harinaInput.text.slice(0, harinaInput.text.length - 1);
+                    }
+                }
             }
 
             TextField {
@@ -80,6 +90,13 @@ Window {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 placeholderText: qsTr("Levadura (g)")
+                inputMethodHints: Qt.ImhDigitsOnly
+                onTextChanged: {
+                    levaduraInput.text = levaduraInput.text.replace(/[^0-9.]/g, '');
+                    if (levaduraInput.text.indexOf('.') !== levaduraInput.text.lastIndexOf('.')) {
+                        levaduraInput.text = levaduraInput.text.slice(0, levaduraInput.text.length - 1);
+                    }
+                }
             }
 
             TextField {
@@ -95,6 +112,13 @@ Window {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 placeholderText: qsTr("Gas (min)")
+                inputMethodHints: Qt.ImhDigitsOnly
+                onTextChanged: {
+                    gasInput.text = gasInput.text.replace(/[^0-9.]/g, '');
+                    if (gasInput.text.indexOf('.') !== gasInput.text.lastIndexOf('.')) {
+                        gasInput.text = gasInput.text.slice(0, gasInput.text.length - 1);
+                    }
+                }
             }
 
             TextField {
@@ -110,6 +134,13 @@ Window {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 placeholderText: qsTr("Pan producido (kg)")
+                inputMethodHints: Qt.ImhDigitsOnly
+                onTextChanged: {
+                    panesInput.text = panesInput.text.replace(/[^0-9.]/g, '');
+                    if (panesInput.text.indexOf('.') !== panesInput.text.lastIndexOf('.')) {
+                        panesInput.text = panesInput.text.slice(0, panesInput.text.length - 1);
+                    }
+                }
             }
         }
 
@@ -137,7 +168,15 @@ Window {
                 Layout.leftMargin: 8
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                placeholderText: qsTr("")
+                text: ""
+                readOnly: true
+                wrapMode: TextEdit.WordWrap
+                color: "black"
+                font.pixelSize: 16
+                background: Rectangle {
+                    color: "white"
+                    border.color: "#dbdbdb"
+                }
             }
 
 
@@ -145,7 +184,6 @@ Window {
                 id: calcButton
                 text: qsTr("Calcular")
                 display: AbstractButton.TextBesideIcon
-                icon.source: "icono.png"
                 font.italic: false
                 highlighted: false
                 Layout.fillHeight: false
@@ -165,18 +203,18 @@ Window {
 
 
                 onClicked: {
-                    // Tomar los textos directamente de los TextFields
-                    let harina = harinaInput.text || "0";
-                    let levadura = levaduraInput.text || "0";
-                    let gas = gasInput.text || "0";
-                    let panProducido = panesInput.text || "0";
+                     let harina = harinaInput.text || "0";
+                     let levadura = levaduraInput.text || "0";
+                     let gas = gasInput.text || "0";
+                     let panProducido = panesInput.text || "0";
 
-                    // Mostrar los valores ingresados en la consola para depuración
-                    console.log("Valores ingresados (como texto):", harina, levadura, gas, panProducido);
+                     console.log("Valores ingresados:", harina, levadura, gas, panProducido);
 
-                    // Invocar método C++ con valores como QString
-                    resultText.text = logic.calcularGanancia(harina, levadura, gas, panProducido);
-                }
+                     let resultado = logic.calcularGanancia(harina, levadura, gas, panProducido);
+                     console.log("Resultado de calcularGanancia:", resultado);
+
+                     resultText.text = resultado;
+                 }
 
             }
 
@@ -214,9 +252,11 @@ Window {
         id: configDialog
         title: "Configuración de Materiales"
         modal: true
+        width: 280
+        height: 500
 
         Column {
-            spacing: 10
+            spacing: 20
 
             TextField {
                 id: harinaPrecioInput

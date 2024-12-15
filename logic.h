@@ -12,7 +12,7 @@ public:
     explicit Logic(QObject *parent = nullptr);
 
     // Declaración del método calcularGanancia
-    QString calcularGanancia(const QString &harina, const QString &levadura, const QString &gas, const QString &panProducido);
+    Q_INVOKABLE QString calcularGanancia(const QString &harina, const QString &levadura, const QString &gas, const QString &panProducido);
 };
 
 #endif // LOGIC_H

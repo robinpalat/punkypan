@@ -6,10 +6,14 @@ import QtQuick.Window 2.15
 
 Window {
     id: window
-    width: 600
+    width: 500
     height: 500
     visible: true
     color: window.color
+    maximumHeight: 500
+    maximumWidth: 500
+    minimumHeight: 500
+    minimumWidth: 500
     flags: Qt.Window
     visibility: Window.Windowed
     title: "Punkypan"
@@ -51,10 +55,24 @@ Window {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight | Qt.AlignTop
 
+            Label {
+                id: label
+                color: "#dd2b2828"
+                text: qsTr("Panes")
+                anchors.left: resultText.right
+                anchors.top: resultText.bottom
+                anchors.fill: parent
+                Layout.bottomMargin: 4
+                Layout.fillWidth: true
+                font.bold: true
+                font.pointSize: 16
+                leftPadding: 8
+            }
+
             TextField {
                 id: harinaInput
                 color: "#afafaf"
-                font.letterSpacing: 1
+                font.letterSpacing: 0
                 hoverEnabled: true
                 Layout.minimumHeight: 30
                 selectionColor: "#f60a0a0a"
@@ -76,10 +94,11 @@ Window {
                 }
             }
 
+
             TextField {
                 id: levaduraInput
                 color: "#afafaf"
-                font.letterSpacing: 1
+                font.letterSpacing: 0
                 Layout.minimumHeight: 30
                 selectionColor: "#f60a0a0a"
                 font.preferShaping: false
@@ -99,10 +118,11 @@ Window {
                 }
             }
 
+
             TextField {
                 id: gasInput
                 color: "#afafaf"
-                font.letterSpacing: 1
+                font.letterSpacing: 0
                 Layout.minimumHeight: 30
                 selectionColor: "#f60a0a0a"
                 Layout.rightMargin: 8
@@ -121,10 +141,11 @@ Window {
                 }
             }
 
+
             TextField {
                 id: panesInput
                 color: "#afafaf"
-                font.letterSpacing: 1
+                font.letterSpacing: 0
                 Layout.minimumHeight: 30
                 selectionColor: "#f60a0a0a"
                 Layout.rightMargin: 8
@@ -142,6 +163,7 @@ Window {
                     }
                 }
             }
+
         }
 
         ColumnLayout {
@@ -151,14 +173,22 @@ Window {
             Layout.minimumHeight: 300
 
             Label {
-                id: label
+                id: label1
                 color: "#dd2b2828"
-                text: qsTr("Panes")
-                font.bold: true
-                Layout.fillWidth: true
-                font.pointSize: 16
-                leftPadding: 8
+                text: qsTr("")
+                anchors.verticalCenter: resultText.verticalCenter
+                anchors.left: resultText.right
+                anchors.right: resultText.left
+                anchors.top: resultText.bottom
+                anchors.bottom: resultText.top
+                anchors.leftMargin: -292
+                anchors.topMargin: -355
                 topPadding: 8
+                leftPadding: 8
+                font.pointSize: 16
+                font.bold: true
+                anchors.horizontalCenter: resultText.horizontalCenter
+                Layout.fillWidth: true
             }
 
             TextArea {
@@ -178,6 +208,7 @@ Window {
                     border.color: "#dbdbdb"
                 }
             }
+
 
 
             Button {
@@ -203,20 +234,21 @@ Window {
 
 
                 onClicked: {
-                     let harina = harinaInput.text || "0";
-                     let levadura = levaduraInput.text || "0";
-                     let gas = gasInput.text || "0";
-                     let panProducido = panesInput.text || "0";
+                    let harina = harinaInput.text || "0";
+                    let levadura = levaduraInput.text || "0";
+                    let gas = gasInput.text || "0";
+                    let panProducido = panesInput.text || "0";
 
-                     console.log("Valores ingresados:", harina, levadura, gas, panProducido);
+                    console.log("Valores ingresados:", harina, levadura, gas, panProducido);
 
-                     let resultado = logic.calcularGanancia(harina, levadura, gas, panProducido);
-                     console.log("Resultado de calcularGanancia:", resultado);
+                    let resultado = logic.calcularGanancia(harina, levadura, gas, panProducido);
+                    console.log("Resultado de calcularGanancia:", resultado);
 
-                     resultText.text = resultado;
-                 }
+                    resultText.text = resultado;
+                }
 
             }
+
 
 
             RowLayout {
@@ -244,6 +276,7 @@ Window {
                 }
             }
 
+
         }
 
     }
@@ -252,7 +285,7 @@ Window {
         id: configDialog
         title: "Configuración de Materiales"
         modal: true
-        width: 280
+        width: 200
         height: 500
 
         Column {

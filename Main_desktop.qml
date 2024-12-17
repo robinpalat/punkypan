@@ -1,7 +1,9 @@
-import QtQuick
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 2.15
-import QtQuick.Window 2.15
+import QtQuick 6.2
+import QtQuick.Controls 6.2
+import QtQuick.Layouts 6.2
+import QtQuick.Templates 6.2 as T
+
+
 
 
 Window {
@@ -18,6 +20,7 @@ Window {
     visibility: Window.Windowed
     title: "Punkypan"
     contentOrientation: Qt.PortraitOrientation
+
 
 
     // Definir un objeto de configuración con un id explícito
@@ -71,12 +74,13 @@ Window {
 
             TextField {
                 id: harinaInput
+                height: 40
                 color: "#afafaf"
                 font.letterSpacing: 0
                 hoverEnabled: true
                 Layout.minimumHeight: 30
                 selectionColor: "#f60a0a0a"
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 Layout.rightMargin: 8
                 Layout.leftMargin: 8
                 Layout.bottomMargin: 0
@@ -97,6 +101,7 @@ Window {
 
             TextField {
                 id: levaduraInput
+                height: 40
                 color: "#afafaf"
                 font.letterSpacing: 0
                 Layout.minimumHeight: 30
@@ -121,6 +126,7 @@ Window {
 
             TextField {
                 id: gasInput
+                height: 40
                 color: "#afafaf"
                 font.letterSpacing: 0
                 Layout.minimumHeight: 30
@@ -144,6 +150,7 @@ Window {
 
             TextField {
                 id: panesInput
+                height: 40
                 color: "#afafaf"
                 font.letterSpacing: 0
                 Layout.minimumHeight: 30
@@ -182,6 +189,7 @@ Window {
                 anchors.top: resultText.bottom
                 anchors.bottom: resultText.top
                 anchors.leftMargin: -292
+                anchors.rightMargin: -292
                 anchors.topMargin: -355
                 topPadding: 8
                 leftPadding: 8
@@ -201,6 +209,10 @@ Window {
                 text: ""
                 readOnly: true
                 wrapMode: TextEdit.WordWrap
+                rightPadding: 10
+                leftPadding: 10
+                topPadding: 6
+                textFormat: Text.MarkdownText
                 color: "black"
                 font.pixelSize: 16
                 background: Rectangle {

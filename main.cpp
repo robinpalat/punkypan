@@ -1,8 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext> 
-#include <QIcon>  
+#include <QQmlContext>
+#include <QIcon>
+#include <QtQuickControls2/QQuickStyle>
 #include "logic.h"
+
 
 
 int main(int argc, char *argv[])
@@ -15,6 +17,7 @@ int main(int argc, char *argv[])
     QIcon appIcon(":/icono.png");
     app.setWindowIcon(appIcon);
 
+    QQuickStyle::setStyle("Material");
 
     // Crear una instancia de la clase Logic
     Logic logic;
